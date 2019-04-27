@@ -1,2 +1,19 @@
 ---
 # defaults file for ansible-role-ynab-stuff
+ynab_bank2ynab_git_repo: https://github.com/bank2ynab/bank2ynab.git
+ynab_bank2ynab_git_dest: /opt/bank2ynab
+ynab_bank2ynab_git_version: develop
+ynab_bank2ynab_git_source_path_csv: /tmp
+ynab_bank2ynab_banks: []
+ynab_user: user1
+ynab_group: user1
+#  - name: UBS
+#    use_regex: True
+#    source_filename_pattern: ^ubs_.*
+#    header_rows: 1
+#    input_columns: Date,Memo,skip,skip,Outflow,Inflow
+#    date_format: %d.%m.%Y
+#    source_csv_delimiter: ;
+
+
+

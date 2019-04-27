@@ -1,2 +1,31 @@
 ---
 # tasks file for ansible-role-ynab-stuff
+
+- name: clone bank2ynab
+  git:
+    repo: "{{ ynab_bank2ynab_git_repo }}"
+    dest: "{{ ynab_bank2ynab_git_dest }}"
+    version: "{{ ynab_bank2ynab_git_version }}"
+    force: yes
+    update: no
+
+- name: setting permissions
+  file:
+    path: "{{ ynab_bank2ynab_git_dest }}"
+    owner: "{{ ynab_user }}"
+    group: "{{ ynab_group }}"
+    recurse: yes
+
+- name: configure bank2ynab
+  template:
+    src: bank2ynab.conf.j2
+    dest: "{{ ynab_bank2ynab_git_dest }}/bank2ynab.conf"
+    owner: "{{ ynab_user }}"
+    group: "{{ ynab_group }}"
+
+- name: Configure cron
+  cron:
+    name: yum autoupdate
+    user: "{{ ynab_user }}"
+    job: "cd {{ ynab_bank2ynab_git_dest }} && python3 {{ ynab_bank2ynab_git_dest }}/bank2ynab.py"
+    cron_file: ynab_stuff
