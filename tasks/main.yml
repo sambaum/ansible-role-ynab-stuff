@@ -6,8 +6,8 @@
     repo: "{{ ynab_bank2ynab_git_repo }}"
     dest: "{{ ynab_bank2ynab_git_dest }}"
     version: "{{ ynab_bank2ynab_git_version }}"
-    force: yes
-    update: no
+    force: "{{ ynab_bank2ynab_git_repo_force }}"
+    update: "{{ ynab_bank2ynab_git_repo_update }}"
 
 - name: setting permissions
   file:

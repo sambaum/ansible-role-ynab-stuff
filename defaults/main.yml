@@ -1,6 +1,8 @@
 ---
 # defaults file for ansible-role-ynab-stuff
 ynab_bank2ynab_git_repo: https://github.com/bank2ynab/bank2ynab.git
+ynab_bank2ynab_git_repo_force: yes
+ynab_bank2ynab_git_repo_update: no
 ynab_bank2ynab_git_dest: /opt/bank2ynab
 ynab_bank2ynab_git_version: develop
 ynab_bank2ynab_git_source_path_csv: /tmp
