@@ -40,7 +40,14 @@
 
 - name: Configure cron
   cron:
-    name: yum autoupdate
+    name: run bank2ynab.py
     user: "{{ ynab_user }}"
     job: "cd {{ ynab_bank2ynab_git_dest }} && python3 {{ ynab_bank2ynab_git_dest }}/bank2ynab.py"
+    cron_file: ynab_stuff
+
+- name: Configure cron 2
+  cron:
+    name: run bank2ynab.py 2
+    user: "{{ ynab_user }}"
+    job: "(sleep 30 ; cd {{ ynab_bank2ynab_git_dest }} && python3 {{ ynab_bank2ynab_git_dest }}/bank2ynab.py)"
     cron_file: ynab_stuff
