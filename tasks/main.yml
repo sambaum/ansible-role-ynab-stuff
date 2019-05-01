@@ -16,10 +16,25 @@
     group: "{{ ynab_group }}"
     recurse: yes
 
-- name: configure bank2ynab
-  template:
-    src: bank2ynab.conf.j2
+- name: configure bank2ynab with additional banks
+  blockinfile:
     dest: "{{ ynab_bank2ynab_git_dest }}/bank2ynab.conf"
+    block: "{{ lookup('template', 'bank2ynab.conf.j2') }}"
+    marker: "### {mark} ANSIBLE MANAGED BLOCK ###"
+
+- name: configure "Source Path"
+  blockinfile:
+    dest: "{{ ynab_bank2ynab_git_dest }}/user_configuration.conf"
+    block: |
+      [DEFAULT]
+      Source Path = {{ ynab_bank2ynab_git_source_path_csv }}
+    marker: "### {mark} ANSIBLE MANAGED BLOCK ###"
+    create: yes
+
+- name: ynab_bank2ynab_git_source_path_csv must exist
+  file:
+    path: "{{ ynab_bank2ynab_git_source_path_csv }}"
+    state: directory
     owner: "{{ ynab_user }}"
     group: "{{ ynab_group }}"
 
